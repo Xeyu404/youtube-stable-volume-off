@@ -10,6 +10,14 @@ The script keeps YouTube's Stable Volume / DRC preference off by default while a
 
 There is no build step and no package manager dependency.
 
+## Structure
+
+- `youtube-stable-volume-off.user.js`: The userscript source and release artifact. This is the main implementation file.
+- `README.md`: User-facing documentation for installation, behavior, compatibility, and troubleshooting.
+- `AGENTS.md`: Maintainer and agent-facing guidance for future changes, assumptions, checks, and release handling.
+- `LICENSE`: MIT license text.
+- `.gitattributes`: Repository text normalization rules.
+
 ## Required Behavior
 
 Preserve these user-visible behaviors unless the user explicitly asks to change them:
@@ -43,6 +51,7 @@ Do not treat the visible settings menu toggle as the source of truth. The menu i
 - Avoid synthetic clicks on YouTube UI. Prefer storage and player API enforcement.
 - Keep changes localized to the userscript unless documentation or release metadata also needs updating.
 - Keep the YouTube storage wrapper compatible with YouTube's current format.
+- If a YouTube internal appears to have changed, verify the current behavior before updating enforcement logic.
 - Preserve the `Storage.prototype.setItem/removeItem` guard unless replacing it with an equally early and reliable interception point.
 - Preserve navigation and video-change detection unless replacing it with coverage for YouTube SPA transitions, playlist autoplay, Shorts, and ad-to-content transitions.
 - Be conservative with MutationObserver scope. Broad DOM observers are more fragile than targeted storage, player, and navigation hooks.
